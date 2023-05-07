@@ -1,24 +1,50 @@
 package excel.sql.email.emailsql;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Students_indexed_qr")
 public class Student {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "user_name")
     private String name;
     private String email;
     @Column(name = "amount_remaining")
     private int amountRemaining;
+    @Column(name = "is_registered")
+    private String isRegistered;
+    @Column(name = "is_band_provided")
+    private String isBandProvided;
 
-    public Student(int id, String name, String email, int amountRemaining) {
+
+    public Student(int id, String name, String email, int amountRemaining, String isRegistered, String isBandProvided, byte[] qrCode) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.amountRemaining = amountRemaining;
+        this.isRegistered = isRegistered;
+        this.isBandProvided = isBandProvided;
+    }
+
+    public String getIsRegistered() {
+        return isRegistered;
+    }
+
+    public void setIsRegistered(String isRegistered) {
+        this.isRegistered = isRegistered;
+    }
+
+    public String getIsBandProvided() {
+        return isBandProvided;
+    }
+
+    public void setIsBandProvided(String isBandProvided) {
+        this.isBandProvided = isBandProvided;
     }
 
     public Student() {
@@ -63,6 +89,10 @@ public class Student {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", amountRemaining=" + amountRemaining +
+                ", isRegistered='" + isRegistered + '\'' +
+                ", isBandProvided='" + isBandProvided + '\'' +
                 '}';
     }
+
+
 }
